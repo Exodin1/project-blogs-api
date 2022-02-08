@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 // const rescue = require('express-rescue');
-const { create } = require('./controllers/userController');
+const { create, login } = require('./controllers/userController');
+// const { login } = require('./services/userService');
 
 const app = express();
 const PORT = 3000 || process.env.PORT;
@@ -14,7 +15,7 @@ app.get('/', (_request, response) => {
 });
 
 app.post('/user', create);
-// app.post('/login');
+app.post('/login', login);
 // app.get('/user/');
 // app.post('/user/:id');
 // app.post('/categories');

@@ -1,4 +1,4 @@
-const { finalValidation, userExist } = require('../services/userService');
+const { finalValidation, userExist, loginValidation } = require('../services/userService');
 const { Users } = require('../models');
 
 const create = async (request, response) => {
@@ -11,4 +11,11 @@ const create = async (request, response) => {
   return response.status(201).json(newUser);
 };
 
-module.exports = { create };
+const login = async (request, response) => {
+  const { email, password } = request.body;
+  const { token, status, message } = await loginValidation(email, password);
+  if (message) return response.status(status).json({ message });
+  return response.status(200).json({ token });
+};
+
+module.exports = { create, login };
