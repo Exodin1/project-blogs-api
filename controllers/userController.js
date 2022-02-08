@@ -18,4 +18,9 @@ const login = async (request, response) => {
   return response.status(200).json({ token });
 };
 
-module.exports = { create, login };
+const getAll = async (request, response) => {
+  const users = await Users.findAll();
+  return response.status(200).json(users);
+};
+
+module.exports = { create, login, getAll };

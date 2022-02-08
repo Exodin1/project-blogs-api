@@ -38,6 +38,16 @@ const generateToken = (data) => JWT.sign(data, process.env.JWT_SECRET, {
   expiresIn: '31d',
 });
 
+const tokenValidation = (token) => {
+  if (!token) return { status: 401, message: 'Token not found' };
+  JWT.verify(token, process.env.JWT_SECRET);
+};
+
+const getAll = async () => {
+  const users = await Users.findAll();
+  return users;
+};
+
 const finalValidation = async (displayName, email, password) => {
   const nameError = await nameValidation(displayName);
   const emailError = await emailValidation(email);
@@ -46,11 +56,6 @@ const finalValidation = async (displayName, email, password) => {
   if (emailError) return emailError;
   if (passwordError) return passwordError;
 };
-
-// quero fazer um post na rota /login
-// o corpo da requisição deve ser { email, password }
-// Caso algum desses campos seja inválido ou não exista um usuário correspondente no banco de dados, retorne um código de status 400 com o corpo { message: "Invalid fields" }
-// Caso esteja tudo certo com o login, a resposta deve ser um token JWT
 
 const loginEmail = (email) => {
   if (!email && email !== '') return { status: 400, message: '"email" is required' };
@@ -80,4 +85,6 @@ module.exports = {
   finalValidation,
   loginValidation,
   generateToken,
+  tokenValidation,
+  getAll,
 };
