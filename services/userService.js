@@ -73,11 +73,14 @@ const loginValidation = async (email, password) => {
   if (emailError) return emailError;
   if (passwordError) return passwordError;
   const user = await userExist(email);
-  console.log(user);
   if (!user) return { status: 400, message: 'Invalid fields' };
   const token = generateToken(user.dataValues);
-  console.log(token);
   return { status: 200, token };
+};
+
+const getUser = async (id) => {
+  const user = await Users.findByPk(id);
+  return user;
 };
 
 module.exports = {
@@ -87,4 +90,5 @@ module.exports = {
   generateToken,
   tokenValidation,
   getAll,
+  getUser,
 };

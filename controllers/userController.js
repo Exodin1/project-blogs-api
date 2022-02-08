@@ -1,4 +1,4 @@
-const { finalValidation, userExist, loginValidation } = require('../services/userService');
+const { finalValidation, userExist, loginValidation, getUser } = require('../services/userService');
 const { Users } = require('../models');
 
 const create = async (request, response) => {
@@ -23,4 +23,11 @@ const getAll = async (request, response) => {
   return response.status(200).json(users);
 };
 
-module.exports = { create, login, getAll };
+const $getUser = async (request, response) => {
+  const { id } = request.params;
+  const user = await getUser(id);
+  if (!user) return response.status(404).json({ message: 'User does not exist' });
+  return response.status(200).json(user);
+};
+
+module.exports = { create, login, getAll, $getUser };

@@ -1,7 +1,7 @@
 const JWT = require('jsonwebtoken');
 const express = require('express');
 const bodyParser = require('body-parser');
-const { create, login, getAll } = require('./controllers/userController');
+const { create, login, getAll, $getUser } = require('./controllers/userController');
 
 const app = express();
 const PORT = 3000 || process.env.PORT;
@@ -25,7 +25,7 @@ app.use((request, response, next) => {
   }
 });
 app.get('/user', getAll);
-// app.post('/user/:id');
+app.get('/user/:id', $getUser);
 // app.post('/categories');
 // app.get('/categories');
 // app.post('/post');
