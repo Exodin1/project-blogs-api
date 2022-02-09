@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { create, login, getAll, $getUser } = require('./controllers/userController');
 const { createCategory, $getall } = require('./controllers/categorieController');
-const { createPost } = require('./controllers/blogpostController');
+const { createPost, getAllPosts, getbyId } = require('./controllers/blogpostController');
 
 const app = express();
 const PORT = 3000 || process.env.PORT;
@@ -32,6 +32,6 @@ app.get('/user/:id', $getUser);
 app.post('/categories', createCategory);
 app.get('/categories', $getall);
 app.post('/post', createPost);
-// app.get('/post');
-// app.get('/post/:id');
+app.get('/post', getAllPosts);
+app.get('/post/:id', getbyId);
 // app.put('/post/:id');
