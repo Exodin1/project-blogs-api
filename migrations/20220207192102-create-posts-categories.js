@@ -12,7 +12,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       categoryId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Categories',
+          key: 'id',
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
       },
     });
   },
