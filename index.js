@@ -13,7 +13,6 @@ app.listen(PORT, () => console.log('Server is running on port', PORT));
 app.get('/', (_request, response) => {
   response.send();
 });
-
 app.post('/user', create);
 app.post('/login', login);
 app.use((request, response, next) => {
