@@ -16,4 +16,4 @@ Neste projeto foi desenvolvido uma Api para um blog, nela, vamos ter um CRUD de 
 - MySQL
 
 ## 📈 Status do projeto
-✅ Concluído
+Concluído ✅ 
